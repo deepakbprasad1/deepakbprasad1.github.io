@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deepak Bindhu Prasad</title>
+  <meta name="description" content="Deepak Bindhu Prasad, robotics and AI engineer: vision-language-action models, robot learning in simulation, motion planning and 3D perception.">
+  <meta property="og:title" content="Deepak Bindhu Prasad, Robotics & AI">
+  <meta property="og:description" content="CAD-VLA: demonstration-free pick-and-place of unseen industrial parts, plus research, projects and certificates.">
+  <meta property="og:image" content="assets/img/cadvla_franka_1.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f5f8b'/%3E%3Ctext x='32' y='42' font-family='Georgia' font-size='28' fill='white' text-anchor='middle'%3EDP%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#top">Deepak Bindhu Prasad</a>
+    <button class="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="nav">
+      <a href="#research">Research</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#publications">Publications</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-small" href="assets/docs/Deepak_Bindhu_Prasad_CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero wrap">
+  <img class="avatar" src="assets/img/profile.jpg" alt="Portrait of Deepak Bindhu Prasad" width="220" height="220">
+  <div>
+    <p class="eyebrow">Robotics &amp; AI Engineer · M.Sc. Electromobility-ACES, FAU Erlangen-Nürnberg</p>
+    <h1>Teaching robots to handle parts they have never seen, using CAD and simulation instead of human demonstrations.</h1>
+    <p class="lead">
+      I am completing my master's at Friedrich-Alexander-Universität Erlangen-Nürnberg with a mechanical engineering background.
+      In my thesis at the FAPS Institute I built <strong>CAD-VLA</strong>, a vision-language-action model that reads a part's CAD file,
+      the 3D scene and a language instruction, then decides how to grasp and place unseen parts. It is trained only on
+      auto-generated Isaac Sim data. I am looking for a <strong>PhD position</strong> in robot learning.
+    </p>
+    <ul class="tags" aria-label="Research interests">
+      <li>Vision-language-action models</li><li>Robot learning from simulation</li><li>Sim-to-real</li>
+      <li>Grasp &amp; motion planning</li><li>3D perception &amp; calibration</li>
+    </ul>
+    <div class="hero-links">
+      <a class="btn" href="assets/docs/Deepak_Bindhu_Prasad_CV.pdf" target="_blank" rel="noopener">Download CV</a>
+      <a class="btn btn-ghost" href="mailto:deepak.bindhu.prasad@gmail.com">Email</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/deepakbindhuprasad" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/deepakprasadbindhu" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESEARCH ============ -->
+<section id="research" class="section">
+  <div class="wrap">
+    <h2>Research</h2>
+
+    <!-- CAD-VLA -->
+    <article class="feature">
+      <div class="feature-head">
+        <p class="eyebrow">Master thesis · FAPS Institute, FAU · 11/2026 – 01/2027</p>
+        <h3>CAD-VLA: A CAD-Grounded Vision-Language-Action Model for Demonstration-Free Pick-and-Place of Unseen Industrial Parts</h3>
+        <p class="stack">PyTorch · PaliGemma-3B / BridgeVLA · LoRA · NVIDIA Isaac Sim &amp; Isaac Lab · cuRobo · GraspGenX · Franka Panda</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><span class="num">68 %</span><span class="lbl">success on 300 held-out episodes with unseen parts</span></div>
+        <div class="stat"><span class="num">≈ 88 %</span><span class="lbl">of the perfect-goal ceiling (78 %), up from 16 % for the first model</span></div>
+        <div class="stat"><span class="num">−19 / −26</span><span class="lbl">points without the CAD / with a wrong CAD, so the model really uses it</span></div>
+        <div class="stat"><span class="num">0</span><span class="lbl">human demonstrations: 1,500 CAD parts, 62k grasp tests, 25k auto-labelled scenes</span></div>
+      </div>
+
+      <div class="two-col">
+        <ul class="bullets">
+          <li>A keypose VLA takes the part's <strong>CAD file</strong>, fused RGB-D scene views and a language instruction, and outputs a 6D pick-and-place goal (grasp, resting face, yaw, position).</li>
+          <li><strong>The CAD is the action space:</strong> the model scores stable faces and yaw angles generated from the CAD, plus physics-tested grasps. cuRobo plans the motion; a closed loop verifies and retries.</li>
+          <li>Fine-tuned PaliGemma-3B with LoRA plus new depth, 3D and CAD encoders, a heatmap decoder and a candidate scorer.</li>
+          <li>Tasks cover table, tray, part-on-part and peg-in-hole placement. Success stays stable when cameras move by up to 30 cm.</li>
+        </ul>
+        <div class="media-grid two">
+          <figure>
+            <video src="assets/video/cadvla_franka_1.mp4" poster="assets/video/cadvla_franka_1.jpg" muted loop playsinline controls preload="none"></video>
+            <figcaption>CAD-VLA placing an unseen part (Franka Panda, Isaac Sim)</figcaption>
+          </figure>
+          <figure>
+            <video src="assets/video/cadvla_franka_2.mp4" poster="assets/video/cadvla_franka_2.jpg" muted loop playsinline controls preload="none"></video>
+            <figcaption>Second held-out episode</figcaption>
+          </figure>
+        </div>
+      </div>
+      <p class="note">Thesis in progress, submission January 2027. Code and full results will be linked here once published.</p>
+    </article>
+
+    <!-- Robot learning experiments -->
+    <article class="feature">
+      <div class="feature-head">
+        <p class="eyebrow">Robot learning experiments · 2025 – 2026</p>
+        <h3>Benchmarking VLA and imitation policies on real and simulated arms</h3>
+        <p class="stack">NVIDIA GR00T N1.5 / N1.7 · ACT · SmolVLA · LeRobot-style low-cost arm · Isaac Sim</p>
+      </div>
+      <p>Before CAD-VLA I trained and compared existing policies on a low-cost 6-DoF arm and in simulation. These runs showed how much
+         human demonstration data current VLAs need, which motivated a demonstration-free approach.</p>
+      <div class="media-grid">
+        <figure><video src="assets/video/groot15_real.mp4" poster="assets/video/groot15_real.jpg" muted loop playsinline controls preload="none"></video><figcaption>GR00T N1.5 on the real arm</figcaption></figure>
+        <figure><video src="assets/video/smolvla_real.mp4" poster="assets/video/smolvla_real.jpg" muted loop playsinline controls preload="none"></video><figcaption>SmolVLA on the real arm</figcaption></figure>
+        <figure><video src="assets/video/act_real.mp4" poster="assets/video/act_real.jpg" muted loop playsinline controls preload="none"></video><figcaption>ACT policy (first 60 s of a long run)</figcaption></figure>
+        <figure><video src="assets/video/groot_sim.mp4" poster="assets/video/groot_sim.jpg" muted loop playsinline controls preload="none"></video><figcaption>GR00T N1.5 in simulation</figcaption></figure>
+        <figure><video src="assets/video/groot17_sim_a.mp4" poster="assets/video/groot17_sim_a.jpg" muted loop playsinline controls preload="none"></video><figcaption>GR00T N1.7 pick-and-place into a tray (sim)</figcaption></figure>
+        <figure><video src="assets/video/groot17_sim_b.mp4" poster="assets/video/groot17_sim_b.jpg" muted loop playsinline controls preload="none"></video><figcaption>GR00T N1.7 with tools on the table (sim)</figcaption></figure>
+        <figure><video src="assets/video/rollout_real.mp4" poster="assets/video/rollout_real.jpg" muted loop playsinline controls preload="none"></video><figcaption>Real-arm pick-and-place trial, Feb 2026</figcaption></figure>
+        <figure><video src="assets/video/teleop.mp4" poster="assets/video/teleop.jpg" muted loop playsinline controls preload="none"></video><figcaption>Arm experiments, Jan 2026</figcaption></figure>
+        <figure><video src="assets/video/isaac_scene.mp4" poster="assets/video/isaac_scene.jpg" muted loop playsinline controls preload="none"></video><figcaption>Isaac Sim kitchen scene, Dec 2025</figcaption></figure>
+      </div>
+      <div class="gallery">
+        <button class="thumb" data-full="assets/img/so101_arm.jpg"><img src="assets/img/so101_arm.jpg" alt="Low-cost robot arm with red gripper on a desk" loading="lazy"><span>Real arm</span></button>
+        <button class="thumb" data-full="assets/img/table_setup.jpg"><img src="assets/img/table_setup.jpg" alt="Table setup with leader and follower arms and laptop" loading="lazy"><span>Lab table setup</span></button>
+        <button class="thumb" data-full="assets/img/groot_tray.jpg"><img src="assets/img/groot_tray.jpg" alt="Simulated yellow arm placing a part in a blue tray" loading="lazy"><span>Tray task (sim)</span></button>
+        <button class="thumb" data-full="assets/img/groot_sim.jpg"><img src="assets/img/groot_sim.jpg" alt="Simulated arm with cube and target" loading="lazy"><span>Cube task (sim)</span></button>
+      </div>
+    </article>
+
+    <!-- Calibration -->
+    <article class="feature">
+      <div class="feature-head">
+        <p class="eyebrow">Project thesis (grade 1.3) &amp; student research assistant · FAPS Institute, FAU · 2024 – 2025</p>
+        <h3>Simulation of 3D Multi-Camera Calibration for Cameras with Non-Overlapping Fields of View</h3>
+        <p class="stack">ROS · Gazebo · Blender (Python) · MoveIt · OpenCV · Isaac Sim</p>
+      </div>
+      <div class="two-col">
+        <div>
+          <ul class="bullets">
+            <li>Built a ROS-integrated Gazebo simulation with configurable cameras, scripted robot motion and hard conditions (lighting, blur, defects) to benchmark calibration algorithms.</li>
+            <li>Automated the modelling of true-to-scale <strong>icosahedral calibration targets</strong> in Blender with Python, and generated synthetic datasets that improved calibration accuracy and robustness.</li>
+            <li>Simulated and real calibration agreed closely in intrinsic parameters and reprojection error, which validated the pipeline.</li>
+            <li>Also built a structured-light (camera + projector) simulation and a MoveIt calibration cell, and migrated the lab stack from ROS Noetic to ROS 2 Jazzy.</li>
+          </ul>
+          <p><a class="btn btn-ghost" href="assets/docs/reports/project-thesis-multi-camera-calibration.pdf" target="_blank" rel="noopener">Read the project thesis (PDF)</a></p>
+        </div>
+        <figure>
+          <video src="assets/video/calib_moveit.mp4" poster="assets/video/calib_moveit.jpg" muted loop playsinline controls preload="none"></video>
+          <figcaption>Simulated calibration cell with MoveIt</figcaption>
+        </figure>
+      </div>
+      <div class="gallery">
+        <button class="thumb" data-full="assets/img/calib_robot_target.jpg"><img src="assets/img/calib_robot_target.jpg" alt="Icosahedral calibration target held by a robot" loading="lazy"><span>Target on the robot</span></button>
+        <button class="thumb" data-full="assets/img/calib_cell.jpg"><img src="assets/img/calib_cell.jpg" alt="Calibration cell with robot and cameras" loading="lazy"><span>Real calibration cell</span></button>
+        <button class="thumb" data-full="assets/img/calib_target_real.jpg"><img src="assets/img/calib_target_real.jpg" alt="Printed icosahedral calibration target" loading="lazy"><span>Printed target</span></button>
+        <button class="thumb" data-full="assets/img/calib_blender.jpg"><img src="assets/img/calib_blender.jpg" alt="Calibration target modelled in Blender" loading="lazy"><span>Target design in Blender</span></button>
+        <button class="thumb" data-full="assets/img/calib_layout.jpg"><img src="assets/img/calib_layout.jpg" alt="Camera layout diagram" loading="lazy"><span>Camera layout</span></button>
+        <button class="thumb" data-full="assets/img/calib_gazebo.jpg"><img src="assets/img/calib_gazebo.jpg" alt="Multi-camera setup in Gazebo" loading="lazy"><span>Multi-camera rig (sim)</span></button>
+        <button class="thumb" data-full="assets/img/calib_sim.jpg"><img src="assets/img/calib_sim.jpg" alt="Simulated calibration setup" loading="lazy"><span>Simulated setup</span></button>
+        <button class="thumb" data-full="assets/img/calib_real.jpg"><img src="assets/img/calib_real.jpg" alt="Real calibration setup" loading="lazy"><span>Real setup</span></button>
+        <button class="thumb" data-full="assets/img/calib_pipeline.jpg"><img src="assets/img/calib_pipeline.jpg" alt="Calibration pipeline flowchart" loading="lazy"><span>Calibration pipeline</span></button>
+        <button class="thumb" data-full="assets/img/calib_checker.jpg"><img src="assets/img/calib_checker.jpg" alt="Checkerboard target in Blender" loading="lazy"><span>Checkerboard target</span></button>
+        <button class="thumb" data-full="assets/img/calib_structured_light.jpg"><img src="assets/img/calib_structured_light.jpg" alt="Structured light projection simulation" loading="lazy"><span>Structured light (sim)</span></button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience" class="section alt">
+  <div class="wrap">
+    <h2>Experience</h2>
+    <ol class="timeline">
+      <li>
+        <div class="when">07/2026 – present<br><span>Forchheim, DE</span></div>
+        <div class="what">
+          <h3>Working Student, Digital Twin &amp; Robotics <span class="org">Siemens Healthineers AG</span></h3>
+          <ul class="bullets">
+            <li>Building digital twins of Siemens Healthineers Innovation Centres worldwide (incl. Erlangen and Slovakia) for the Shift Innovation platform, with an immersive VR walkthrough of each centre.</li>
+            <li>Modelled true-to-scale environments in Blender; built interactive scenes, navigation and VR interactions in Unity (C#) for Meta Quest.</li>
+            <li>Support the robotics team with humanoid robot setup, experimentation and VLA-based manipulation.</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="when">01/2026 – 03/2026<br><span>Nürnberg, DE</span></div>
+        <div class="what">
+          <h3>Student Intern, Robotics Software (ROS 2 / PLC) <span class="org">Siemens AG</span></h3>
+          <ul class="bullets">
+            <li>Contributed to the <strong>0.3.1 release of ROXSie (SIMATIC ROS Connector)</strong>, which bridges ROS 2 and Siemens PLCs through automated code generation and shared-memory communication.</li>
+            <li>Extended ROS message conversion to keep comments and constants from .msg files in generated TIA Portal structures; added Docker-based ROS 2 middleware selection.</li>
+            <li>Fixed bugs in workspace generation, installer validation, IEC-compliant PLC code generation and PLC↔ROS 2 string handling; validated on Open Controller 3 and IPC BX 59A.</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="when">11/2024 – 12/2025<br><span>Erlangen, DE</span></div>
+        <div class="what">
+          <h3>Student Research Assistant, Motion Planning &amp; Simulation <span class="org">FAPS Institute, FAU</span></h3>
+          <ul class="bullets">
+            <li>Designed motion-planning pipelines for a 6-axis robot with ROS and MoveIt: collision-free trajectories, kinematic optimisation, execution in simulation and on the real robot.</li>
+            <li>Developed machine-learning models that learn and compensate for trajectory deviations, improving positioning accuracy.</li>
+            <li>Built a high-fidelity NVIDIA Isaac Sim environment; implemented intrinsic and extrinsic multi-camera calibration for 6-DoF pose estimation.</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="when">06/2025 – 07/2026<br><span>Erlangen, DE</span></div>
+        <div class="what">
+          <h3>Student Teaching Assistant <span class="org">IDEA Lab, FAU</span></h3>
+          <p>Course: Algorithms, Programming and Data Representation. Designed exercises and exam questions, led weekly Q&amp;A sessions, graded coding assignments.</p>
+        </div>
+      </li>
+      <li>
+        <div class="when">05/2022 – 06/2023<br><span>Bengaluru, IN</span></div>
+        <div class="what">
+          <h3>Trainee Engineer, Software Quality Assurance <span class="org">Operative India Pvt. Ltd.</span></h3>
+          <p>Built and tested the Pacing Calculation API, validated the Direct-to-GAM inventory data flow, and resolved 100+ bugs across the AOS and OperativeOne platforms (Java, TestNG, Selenium, REST APIs).</p>
+        </div>
+      </li>
+      <li>
+        <div class="when">06/2018 – 04/2021<br><span>Coimbatore, IN</span></div>
+        <div class="what">
+          <h3>Student Engineer &amp; Team Captain <span class="org">Hi-Racing Motorsports</span></h3>
+          <p>Designed, analysed, built and raced SAE vehicles (ATV, e-ATV, Formula Student car, go-kart). Captained a 25-member team to <strong>All-India 1st place (Overall Champion)</strong> at the Rally Car Design Challenge 2019.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section id="education" class="section">
+  <div class="wrap">
+    <h2>Education</h2>
+    <div class="cards two">
+      <div class="card">
+        <p class="eyebrow">10/2023 – 01/2027 · Erlangen, Germany</p>
+        <h3>M.Sc. Electromobility-ACES</h3>
+        <p class="org">Friedrich-Alexander-Universität Erlangen-Nürnberg</p>
+        <ul class="bullets">
+          <li>Major: AI &amp; Autonomous Driving; Sustainable Mobility &amp; Production Technology</li>
+          <li>Current grade 2.1 (80 / 120 ECTS)</li>
+          <li>Selected courses: Machine Learning for Engineers II (1.0), Machine Learning for Engineers I (1.3), Algorithms, Programming &amp; Data Representation (1.3), Data Science Survival Skills (1.3), Project Thesis (1.3)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">08/2017 – 05/2021 · Coimbatore, India</p>
+        <h3>B.E. Mechanical Engineering</h3>
+        <p class="org">Hindusthan College of Engineering and Technology (Anna University)</p>
+        <ul class="bullets">
+          <li>CGPA 8.83 / 10 (German scale 1.8)</li>
+          <li>Focus: vehicle design, CAD/CAE, manufacturing, thermal and fluid sciences</li>
+          <li>Final-year project: flywheel-based energy generation system</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ENGINEERING PROJECTS ============ -->
+<section id="projects" class="section alt">
+  <div class="wrap">
+    <h2>Engineering projects</h2>
+    <div class="gallery wide">
+      <button class="thumb" data-full="assets/img/baja_action.jpg"><img src="assets/img/baja_action.jpg" alt="Team ATV racing through dust" loading="lazy"><span>Endurance run</span></button>
+      <button class="thumb" data-full="assets/img/baja_trophies.jpg"><img src="assets/img/baja_trophies.jpg" alt="ATV with trophies in front" loading="lazy"><span>RCDC 2019 trophies</span></button>
+      <button class="thumb" data-full="assets/img/rcdc_desert.jpg"><img src="assets/img/rcdc_desert.jpg" alt="ATV in the Thar desert" loading="lazy"><span>Rally Car Design Challenge, Bikaner</span></button>
+      <button class="thumb" data-full="assets/img/baja_team.jpg"><img src="assets/img/baja_team.jpg" alt="Two team members with the ATV" loading="lazy"><span>Team Hindusthani Lahurians</span></button>
+      <button class="thumb" data-full="assets/img/baja_dusk.jpg"><img src="assets/img/baja_dusk.jpg" alt="ATV at dusk" loading="lazy"><span>ATV at dusk</span></button>
+      <button class="thumb" data-full="assets/img/formula_car.jpg"><img src="assets/img/formula_car.jpg" alt="Formula-style race car in the workshop" loading="lazy"><span>SUPRA Formula car</span></button>
+    </div>
+    <div class="cards three">
+      <div class="card">
+        <h3>All-Terrain Electric Vehicle (E-BAJA SAEINDIA)</h3>
+        <p class="stack">SolidWorks · ANSYS · Adams</p>
+        <p>Designed the roll cage, double-wishbone suspension, Ackermann steering, braking and electric powertrain; validated with FEA. Published in IJERT.</p>
+        <a href="assets/docs/reports/IJERT-2020-all-terrain-electric-vehicle.pdf" target="_blank" rel="noopener">Paper (PDF) →</a>
+      </div>
+      <div class="card">
+        <h3>Formula Student Race Car (SUPRA SAEINDIA 2019)</h3>
+        <p>Designed, analysed and manufactured a Formula-style race car; raced at the Buddh International Circuit, Greater Noida.</p>
+        <a href="assets/docs/certificates/supra-2019.pdf" target="_blank" rel="noopener">Certificate (PDF) →</a>
+      </div>
+      <div class="card">
+        <h3>Vertical Axis Wind Turbine with Tail-Guiding Mechanism</h3>
+        <p>Funded by the Ministry of Education, Government of India. Designer, analyst and manufacturer; follow-up study on dynamic flapping blades to raise rotor output.</p>
+        <a href="assets/docs/reports/be-vawt-flapping-blades.pdf" target="_blank" rel="noopener">Report (PDF) →</a>
+      </div>
+      <div class="card">
+        <h3>Energy Multiplication Flywheel</h3>
+        <p>B.E. final-year project: designed and built a flywheel-based energy generation system (flywheel, belt drive, motor, alternator).</p>
+        <a href="assets/docs/reports/be-final-year-flywheel.pdf" target="_blank" rel="noopener">Report (PDF) →</a>
+      </div>
+      <div class="card">
+        <h3>Automatic Coconut Shell Cutting Machine</h3>
+        <p>Designed and fabricated a low-cost automatic de-shelling machine with a saw-blade roller and automatic loading and unloading.</p>
+        <a href="assets/docs/reports/be-coconut-shell-cutter.pdf" target="_blank" rel="noopener">Report (PDF) →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PUBLICATIONS ============ -->
+<section id="publications" class="section">
+  <div class="wrap">
+    <h2>Publications</h2>
+    <ol class="pubs">
+      <li>
+        <p><strong>Design and Analysis of All-Terrain Electric Vehicle.</strong> N. Gowtham Rajan, <u>Deepak B. Prasad</u>, A. Anwar Wasim, K. Gowtham, Ajith George.
+        <em>International Journal of Engineering Research &amp; Technology (IJERT)</em>, Vol. 9, Issue 7, July 2020. Paper ID IJERTV9IS070179.</p>
+        <p class="links"><a href="assets/docs/reports/IJERT-2020-all-terrain-electric-vehicle.pdf" target="_blank" rel="noopener">PDF</a>
+        · <a href="assets/docs/certificates/ijert-publication.pdf" target="_blank" rel="noopener">Certificate of publication</a></p>
+      </li>
+      <li>
+        <p><strong>Design and Analysis of All-Terrain Electric Vehicle</strong> (conference presentation).
+        <em>International Virtual Conference on Recent Innovations in Science, Engineering and Technology (IVCRISET-2020)</em>, M. Kumarasamy College of Engineering, July 2020.</p>
+        <p class="links"><a href="assets/docs/certificates/ivcriset-2020-presentation.pdf" target="_blank" rel="noopener">Certificate of presentation</a></p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ AWARDS & CERTIFICATES ============ -->
+<section id="certificates" class="section alt">
+  <div class="wrap">
+    <h2>Honours, awards &amp; certificates</h2>
+    <ul class="honours">
+      <li><strong>Overall Champion, All-India 1st place</strong>, Rally Car Design Challenge 2019, Bikaner (Team Captain)</li>
+      <li><strong>1st place</strong>, Manufacturing Tech Challenge, SAEISS Student Convention, Tier II &amp; Tier III</li>
+      <li><strong>1st place</strong>, Business Plan ("Effi-Cycle"), SAEISS Student Convention, Tier II</li>
+      <li>Certificate of Appreciation, Dept. of Mechanical Engineering, for SAE competitions (2019–20)</li>
+    </ul>
+
+    <div class="filters" role="group" aria-label="Filter certificates">
+      <button class="chip is-on" data-filter="all">All</button>
+      <button class="chip" data-filter="award">Awards</button>
+      <button class="chip" data-filter="competition">Competitions</button>
+      <button class="chip" data-filter="publication">Publications</button>
+      <button class="chip" data-filter="training">Courses &amp; training</button>
+    </div>
+
+    <div class="certs">
+      <!-- data-cat: award | competition | publication | training -->
+      <button class="cert" data-cat="award" data-pdf="assets/docs/certificates/rcdc-2019.pdf" data-full="assets/thumbs/rcdc-2019.jpg"><img src="assets/thumbs/rcdc-2019.jpg" alt="" loading="lazy"><span>Rally Car Design Challenge 2019 · Overall Champion</span></button>
+      <button class="cert" data-cat="award" data-pdf="assets/docs/certificates/saeiss-manufacturing-1st-tier3.pdf" data-full="assets/thumbs/saeiss-manufacturing-1st-tier3.jpg"><img src="assets/thumbs/saeiss-manufacturing-1st-tier3.jpg" alt="" loading="lazy"><span>SAEISS 2019 · Manufacturing Tech Challenge, 1st</span></button>
+      <button class="cert" data-cat="award" data-pdf="assets/docs/certificates/saeiss-manufacturing-1st-tier2.pdf" data-full="assets/thumbs/saeiss-manufacturing-1st-tier2.jpg"><img src="assets/thumbs/saeiss-manufacturing-1st-tier2.jpg" alt="" loading="lazy"><span>SAEISS Tier II · Manufacturing Tech Challenge, 1st</span></button>
+      <button class="cert" data-cat="award" data-pdf="assets/docs/certificates/saeiss-business-plan-1st-tier2.pdf" data-full="assets/thumbs/saeiss-business-plan-1st-tier2.jpg"><img src="assets/thumbs/saeiss-business-plan-1st-tier2.jpg" alt="" loading="lazy"><span>SAEISS Tier II · Business Plan, 1st</span></button>
+      <button class="cert" data-cat="award" data-pdf="assets/docs/certificates/mech-dept-appreciation.pdf" data-full="assets/thumbs/mech-dept-appreciation.jpg"><img src="assets/thumbs/mech-dept-appreciation.jpg" alt="" loading="lazy"><span>Dept. of Mechanical Engineering · Appreciation 2019–20</span></button>
+      <button class="cert" data-cat="publication" data-pdf="assets/docs/certificates/ijert-publication.pdf" data-full="assets/thumbs/ijert-publication.jpg"><img src="assets/thumbs/ijert-publication.jpg" alt="" loading="lazy"><span>IJERT 2020 · Certificate of publication</span></button>
+      <button class="cert" data-cat="publication" data-pdf="assets/docs/certificates/ivcriset-2020-presentation.pdf" data-full="assets/thumbs/ivcriset-2020-presentation.jpg"><img src="assets/thumbs/ivcriset-2020-presentation.jpg" alt="" loading="lazy"><span>IVCRISET-2020 · Paper presentation</span></button>
+      <button class="cert" data-cat="competition" data-pdf="assets/docs/certificates/ebaja-2020.pdf" data-full="assets/thumbs/ebaja-2020.jpg"><img src="assets/thumbs/ebaja-2020.jpg" alt="" loading="lazy"><span>BAJA SAEINDIA 2020 · NATRAX, Pithampur</span></button>
+      <button class="cert" data-cat="competition" data-pdf="assets/docs/certificates/supra-2019.pdf" data-full="assets/thumbs/supra-2019.jpg"><img src="assets/thumbs/supra-2019.jpg" alt="" loading="lazy"><span>SUPRA SAEINDIA 2019 · Buddh International Circuit</span></button>
+      <button class="cert" data-cat="competition" data-pdf="assets/docs/certificates/baja-2019.pdf" data-full="assets/thumbs/baja-2019.jpg"><img src="assets/thumbs/baja-2019.jpg" alt="" loading="lazy"><span>Virtual BAJA SAEINDIA 2019</span></button>
+      <button class="cert" data-cat="competition" data-pdf="assets/docs/certificates/baja-2018.pdf" data-full="assets/thumbs/baja-2018.jpg"><img src="assets/thumbs/baja-2018.jpg" alt="" loading="lazy"><span>Virtual BAJA SAEINDIA 2018</span></button>
+      <button class="cert" data-cat="competition" data-pdf="assets/docs/certificates/kings-karting-2018.pdf" data-full="assets/thumbs/kings-karting-2018.jpg"><img src="assets/thumbs/kings-karting-2018.jpg" alt="" loading="lazy"><span>Kings Karting Championship 2K18</span></button>
+      <button class="cert" data-cat="competition" data-pdf="assets/docs/certificates/suvc-2019-coordinator.pdf" data-full="assets/thumbs/suvc-2019-coordinator.jpg"><img src="assets/thumbs/suvc-2019-coordinator.jpg" alt="" loading="lazy"><span>Saur Urja Vehicle Challenge 2019 · Coordinator</span></button>
+      <button class="cert" data-cat="competition" data-pdf="assets/docs/certificates/saeiss-problem-solving-tier2.pdf" data-full="assets/thumbs/saeiss-problem-solving-tier2.jpg"><img src="assets/thumbs/saeiss-problem-solving-tier2.jpg" alt="" loading="lazy"><span>SAEISS Tier II · Engineering Problem Solving</span></button>
+      <button class="cert" data-cat="competition" data-pdf="assets/docs/certificates/saeiss-gdrt-cad-tier2.pdf" data-full="assets/thumbs/saeiss-gdrt-cad-tier2.jpg"><img src="assets/thumbs/saeiss-gdrt-cad-tier2.jpg" alt="" loading="lazy"><span>SAEISS Tier II · GD&amp;T, Business Plan, CAD Design</span></button>
+      <button class="cert" data-cat="competition" data-pdf="assets/docs/certificates/saeiss-manufacturing-tier3.pdf" data-full="assets/thumbs/saeiss-manufacturing-tier3.jpg"><img src="assets/thumbs/saeiss-manufacturing-tier3.jpg" alt="" loading="lazy"><span>SAEISS 2019 · Manufacturing Tech Challenge</span></button>
+      <button class="cert" data-cat="competition" data-pdf="assets/docs/certificates/saeiss-business-plan-tier3.pdf" data-full="assets/thumbs/saeiss-business-plan-tier3.jpg"><img src="assets/thumbs/saeiss-business-plan-tier3.jpg" alt="" loading="lazy"><span>SAEISS 2019 · Business Plan</span></button>
+      <button class="cert" data-cat="competition" data-pdf="assets/docs/certificates/vihara-science-model-2018.pdf" data-full="assets/thumbs/vihara-science-model-2018.jpg"><img src="assets/thumbs/vihara-science-model-2018.jpg" alt="" loading="lazy"><span>Vihara Elements 2018 · Science model presentation</span></button>
+      <button class="cert" data-cat="training" data-pdf="assets/docs/certificates/hi-racing-internship.pdf" data-full="assets/thumbs/hi-racing-internship.jpg"><img src="assets/thumbs/hi-racing-internship.jpg" alt="" loading="lazy"><span>Hi-Racing Motorsports · Internship</span></button>
+      <button class="cert" data-cat="training" data-pdf="assets/docs/certificates/cambridge-bec-preliminary.pdf" data-full="assets/thumbs/cambridge-bec-preliminary.jpg"><img src="assets/thumbs/cambridge-bec-preliminary.jpg" alt="" loading="lazy"><span>Cambridge English · Business Preliminary</span></button>
+      <button class="cert" data-cat="training" data-pdf="assets/docs/certificates/ansys-diploma.pdf" data-full="assets/thumbs/ansys-diploma.jpg"><img src="assets/thumbs/ansys-diploma.jpg" alt="" loading="lazy"><span>ANSYS Diploma · CADD Centre</span></button>
+      <button class="cert" data-cat="training" data-pdf="assets/docs/certificates/solar-vehicle-workshop.pdf" data-full="assets/thumbs/solar-vehicle-workshop.jpg"><img src="assets/thumbs/solar-vehicle-workshop.jpg" alt="" loading="lazy"><span>Workshop · Design &amp; Development of Solar Vehicle</span></button>
+      <button class="cert" data-cat="training" data-pdf="assets/docs/certificates/tnstc-inplant-training.pdf" data-full="assets/thumbs/tnstc-inplant-training.jpg"><img src="assets/thumbs/tnstc-inplant-training.jpg" alt="" loading="lazy"><span>TNSTC · In-plant training</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" class="section">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <dl class="skills">
+      <dt>Robot learning &amp; AI</dt><dd>Vision-language-action models, PyTorch, Hugging Face Transformers, PEFT/LoRA, PaliGemma, BridgeVLA, synthetic data generation</dd>
+      <dt>Robotics</dt><dd>ROS (Noetic), ROS 2 (Jazzy), MoveIt / MoveIt 2, cuRobo, RViz, motion planning, inverse kinematics, grasp planning (GraspGenX), Franka Panda, Unitree G1</dd>
+      <dt>Simulation</dt><dd>NVIDIA Isaac Sim, Isaac Lab, Gazebo, MuJoCo, Unity, Blender</dd>
+      <dt>Vision &amp; 3D</dt><dd>OpenCV, YOLO, RGB-D point-cloud fusion, multi-camera calibration, 6-DoF pose estimation</dd>
+      <dt>Programming</dt><dd>Python, C++, C#, Java</dd>
+      <dt>Industrial &amp; XR</dt><dd>Siemens TIA Portal, SIMATIC PLC–ROS 2 integration, Meta Quest, Unity VR</dd>
+      <dt>Tools</dt><dd>Linux (Ubuntu), Docker, Conda, Git, GitHub, GitLab</dd>
+      <dt>Mechanical CAD / CAE</dt><dd>SolidWorks, Siemens NX, CATIA V5, AutoCAD, ANSYS (FEA), Lotus; TIG/arc welding</dd>
+      <dt>Languages</dt><dd>English (fluent), Malayalam (native), German (A2)</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ ON REQUEST + CONTACT ============ -->
+<section id="contact" class="section alt">
+  <div class="wrap two-col">
+    <div>
+      <h2>Documents on request</h2>
+      <p>For applications I can send these directly:</p>
+      <ul class="bullets">
+        <li>FAU transcript of records and B.E. transcripts / grade sheets</li>
+        <li>Letters of recommendation</li>
+        <li>Employment and experience letters</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Contact</h2>
+      <p>Erlangen, Germany</p>
+      <p><a href="mailto:deepak.bindhu.prasad@gmail.com">deepak.bindhu.prasad@gmail.com</a></p>
+      <p><a href="https://linkedin.com/in/deepakbindhuprasad" target="_blank" rel="noopener">linkedin.com/in/deepakbindhuprasad</a><br>
+         <a href="https://github.com/deepakprasadbindhu" target="_blank" rel="noopener">github.com/deepakprasadbindhu</a><br>
+         <a href="https://leetcode.com/u/DeepakBindhuPrasad" target="_blank" rel="noopener">leetcode.com/u/DeepakBindhuPrasad</a></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer wrap">
+  <p>© <span id="year"></span> Deepak Bindhu Prasad</p>
+</footer>
+
+<dialog class="lightbox" aria-label="Image viewer">
+  <button class="lb-close" aria-label="Close">×</button>
+  <img alt="">
+  <div class="lb-bar"><span class="lb-cap"></span><a class="lb-pdf btn btn-small" target="_blank" rel="noopener">Open PDF</a></div>
+</dialog>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
