@@ -43,7 +43,7 @@ assets/docs/             CV, certificates (PDF), reports and paper
 - Add a certificate: put the PDF in `assets/docs/certificates/`, a JPG preview in `assets/thumbs/`,
   then copy one `<button class="cert" ...>` line and change the paths, caption and `data-cat`
   (`award`, `competition`, `publication` or `training`).
-- Replace the CV: overwrite `assets/docs/Deepak_Bindhu_Prasad_CV.pdf` (keep the same name).
+- Replace the CV: overwrite `assets/docs/Deepak_Bindhu_Prasad_FlowCV_Resume_2026-11-26.pdf` and update the two CV links in index.html.
 
 Transcripts, grade sheets, recommendation letters and employment letters are deliberately **not** in this
 repository. Anything pushed to a public GitHub repo stays in its history even if deleted later.
