@@ -19,7 +19,7 @@ python -m http.server 8000
    git init -b main
    git add .
    git commit -m "Portfolio site"
-   git remote add origin https://github.com/deepakprasadbindhu/deepakbprasad1.github.io.git
+   git remote add origin https://github.com/deepakbprasad1/deepakbprasad1.github.io.git
    git push -u origin main
    ```
 3. Repository → Settings → Pages → Source: *Deploy from a branch*, branch `main`, folder `/ (root)`.
@@ -47,3 +47,16 @@ assets/docs/             CV, certificates (PDF), reports and paper
 
 Transcripts, grade sheets, recommendation letters and employment letters are deliberately **not** in this
 repository. Anything pushed to a public GitHub repo stays in its history even if deleted later.
+
+## Updating the live site
+
+Edit files in this folder, then:
+
+```bash
+cd website
+git add .
+git commit -m "Update site"
+git push
+```
+
+GitHub rebuilds the site within a minute or two.
